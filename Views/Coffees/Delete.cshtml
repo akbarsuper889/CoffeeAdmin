@@ -1,0 +1,46 @@
+﻿@model CoffeeAdmin.Models.Coffee
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Coffee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NamaKopi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NamaKopi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AsalKopi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AsalKopi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JenisKopi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JenisKopi)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeskripsiKopi)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeskripsiKopi)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
