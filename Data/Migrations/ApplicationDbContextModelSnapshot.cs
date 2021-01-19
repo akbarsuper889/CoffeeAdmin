@@ -8,7 +8,7 @@ using System;
 
 namespace CoffeeAdmin.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CoffeeAdmin.Models.CoffeeContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

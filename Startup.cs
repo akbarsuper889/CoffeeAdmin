@@ -1,4 +1,5 @@
 ﻿using CoffeeAdmin.Data;
+using CoffeeAdmin.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace CoffeeAdmin
 {
@@ -34,11 +36,28 @@ namespace CoffeeAdmin
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<Models.CoffeeContext>();
+            //services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<Models.CoffeeContext>();
 
             services.AddDbContext<Models.CoffeeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultUI()
+                .AddEntityFrameworkStores<CoffeeContext>().AddDefaultTokenProviders();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("readOnlyPolicy",
+                    builder => builder.RequireRole("Admin", "User"));
+                options.AddPolicy("writePolicy",
+                    builder => builder.RequireRole("Admin"));
+                options.AddPolicy("editPolicy",
+                    builder => builder.RequireRole("Admin"));
+                options.AddPolicy("deletePolicy",
+                    builder => builder.RequireRole("Admin"));
+            });
+
+            services.AddScoped<Coffee>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

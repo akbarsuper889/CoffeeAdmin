@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CoffeeAdmin.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoffeeAdmin.Controllers
 {
@@ -19,6 +20,7 @@ namespace CoffeeAdmin.Controllers
         }
 
         // GET: Coffees
+        [Authorize(Policy = "readonlypolicy")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Coffee.ToListAsync());
@@ -43,6 +45,7 @@ namespace CoffeeAdmin.Controllers
         }
 
         // GET: Coffees/Create
+        [Authorize(Policy = "writepolicy")]
         public IActionResult Create()
         {
             return View();
@@ -65,6 +68,7 @@ namespace CoffeeAdmin.Controllers
         }
 
         // GET: Coffees/Edit/5
+        [Authorize(Policy = "editpolicy")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,6 +120,7 @@ namespace CoffeeAdmin.Controllers
         }
 
         // GET: Coffees/Delete/5
+        [Authorize(Policy = "deletepolicy")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

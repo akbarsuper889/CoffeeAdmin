@@ -1,10 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CoffeeAdmin.Models
 {
-    public partial class CoffeeContext : DbContext
+    public partial class CoffeeContext : IdentityDbContext
     {
         public CoffeeContext()
         {
@@ -43,6 +44,7 @@ namespace CoffeeAdmin.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
             });
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

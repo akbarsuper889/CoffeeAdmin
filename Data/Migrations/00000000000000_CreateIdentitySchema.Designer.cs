@@ -9,7 +9,7 @@ using System;
 
 namespace CoffeeAdmin.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CoffeeAdmin.Models.CoffeeContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
